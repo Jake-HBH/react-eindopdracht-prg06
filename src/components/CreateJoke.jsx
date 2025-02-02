@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router';
 function CreateJoke() {
     const [formData, setFormData] = useState({
         title: '',
-        body: '',
+        description: '',
         author: ''
     });
 
@@ -33,47 +33,54 @@ function CreateJoke() {
             if (response.ok) {
                 navigate('/');
             } else {
+                console.error("Failed to post the joke");
             }
         } catch (error) {
+            console.error("Error submitting joke:", error);
         }
     };
 
     return (
-        <div id="root">
-            <div className="form-container">
-                <h2>Post a joke</h2>
+        <div className="min-h-screen flex justify-center items-center bg-background text-text">
+            <div className="bg-white shadow-card rounded-xl p-6 w-full max-w-lg">
+                <h2 className="text-2xl font-bold text-primary mb-4">Post a Joke</h2>
                 <form onSubmit={handleSubmit}>
-                    <div className="form-group">
-                        <label htmlFor="title">Title:</label>
+                    <div className="form-group mb-4">
+                        <label htmlFor="title" className="block mb-1 text-sm text-gray-700">Title:</label>
                         <input
                             type="text"
                             id="title"
                             name="title"
                             value={formData.title}
                             onChange={handleInputChange}
+                            className="w-full p-2 border border-gray-300 rounded-lg"
                         />
                     </div>
-                    <div className="form-group">
-                        <label htmlFor="body">Description:</label>
+                    <div className="form-group mb-4">
+                        <label htmlFor="description" className="block mb-1 text-sm text-gray-700">Description:</label>
                         <textarea
-                            id="body"
-                            name="body"
-                            value={formData.body}
+                            id="description"
+                            name="description"
+                            value={formData.description}
                             onChange={handleInputChange}
                             rows="4"
+                            className="w-full p-2 border border-gray-300 rounded-lg"
                         ></textarea>
                     </div>
-                    <div className="form-group">
-                        <label htmlFor="author">Author:</label>
+                    <div className="form-group mb-4">
+                        <label htmlFor="author" className="block mb-1 text-sm text-gray-700">Author:</label>
                         <input
                             type="text"
                             id="author"
                             name="author"
                             value={formData.author}
                             onChange={handleInputChange}
+                            className="w-full p-2 border border-gray-300 rounded-lg"
                         />
                     </div>
-                    <button type="submit" className="btn-submit">Submit</button>
+                    <button type="submit" className="w-full bg-primary text-white py-2 rounded-lg hover:bg-primary-dark">
+                        Post
+                    </button>
                 </form>
             </div>
         </div>

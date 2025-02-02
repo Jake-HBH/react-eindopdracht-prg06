@@ -1,14 +1,14 @@
 import React from 'react';
 import { useNavigate } from 'react-router';
 
-function DeleteNoteButton({ noteId }) {
+function DeleteJokeButton({ jokeId }) {
     const navigate = useNavigate();
 
     const handleDelete = async () => {
         const confirmDelete = window.confirm('Are you sure you want to delete this joke?');
         if (confirmDelete) {
             try {
-                const response = await fetch(`http://145.24.223.74:8010/jokes/${noteId}`, {
+                const response = await fetch(`http://145.24.223.74:8010/jokes/${jokeId}`, {
                     method: 'DELETE',
                     headers: {
                         'Accept': 'application/json',
@@ -17,7 +17,6 @@ function DeleteNoteButton({ noteId }) {
 
                 if (response.ok) {
                     navigate('/');
-                } else {
                 }
             } catch (error) {
             }
@@ -26,9 +25,9 @@ function DeleteNoteButton({ noteId }) {
 
     return (
         <button className="btn-delete" onClick={handleDelete}>
-            Delete Note
+            Delete Joke
         </button>
     );
 }
 
-export default DeleteNoteButton;
+export default DeleteJokeButton;
